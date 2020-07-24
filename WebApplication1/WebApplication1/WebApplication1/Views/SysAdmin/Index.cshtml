@@ -50,10 +50,10 @@
               <td class="user-license" hidden>@user.License</td>
               <td class="user-insurance" hidden>@user.Insurance</td>
               <td class="user-pass" hidden>@user.Password</td>
-              <tr class="user-asoc" hidden>
+              <tr id="user-asoc-@user.Id" class="user-asoc" hidden>
                 @foreach(var t in (dynamic)@user.asociations){
-                  <td class="user-@t.AssocName" hidden>@t.AssocName</td>
-                  <td class="user-@t.AssocName"hidden>@t.Function</td>
+                  <td class="user-asoc-name" hidden>@t.AssocName</td>
+                  <td class="user-asoc-function"hidden>@t.Function</td>
                 }
               </tr>
             </tr>
@@ -186,8 +186,6 @@
 <script type="text/javascript">
   var func=['@(func.Id)','@(func.FunctionName)' ];
   functions.push(func);
-
-
 </script>
 }
 

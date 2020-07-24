@@ -42,7 +42,7 @@ namespace HuntingAssociationUI.Controllers
 
 
             PresentationUserDTO p1=new PresentationUserDTO();
-
+            p1.Id=1;
             p1.Name="Ionut";
             p1.Surname="Gion";
             p1.Email="aaa@yahoo.com";

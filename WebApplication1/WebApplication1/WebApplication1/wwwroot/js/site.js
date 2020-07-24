@@ -39,6 +39,7 @@ $(document).ready(function(){
       currentEl.classList.add("lighten-1");
 
         for(var i=0; i<currentEl.childNodes.length;i++){
+            var userId;
             switch(currentEl.childNodes[i].className){
                 case "user-username":
                     console.log(currentEl.childNodes[i].innerHTML);
@@ -56,7 +57,9 @@ $(document).ready(function(){
                     document.getElementById("last_name").value=currentEl.childNodes[i].innerHTML;
                     break;
                 case "user-userid":
-                    document.getElementById("userid").value=currentEl.childNodes[i].innerHTML;  
+                    document.getElementById("userid").value=currentEl.childNodes[i].innerHTML; 
+                    console.log(currentEl.childNodes[i].innerHTML);
+                    userId= currentEl.childNodes[i].innerHTML; 
                     break;
                 case "user-license":
                     document.getElementById("license").value=currentEl.childNodes[i].innerHTML;  
@@ -67,9 +70,27 @@ $(document).ready(function(){
                 case "user-pass":
                     document.getElementById("password").value=currentEl.childNodes[i].innerHTML;     
                     break;
-                case "user-asoc":
-                    document.getElementById("")
+                
             }
+            console.log(userId);
+            var asocs=document.getElementById(`user-asoc-${userId}`);
+            
+            var asocNames=[];
+            var asocFuncts=[]; 
+
+            for(var j=0;j<asocs.childNodes.length;j++){
+                    var findId=asocs.childNodes[i].className;
+                    switch(findId){
+                        case "user-asoc-name":
+                            asocNames.push(asocs.childNodes[i].innerHTML);
+                            break;
+                        case "user-asoc-function":
+                            asocFuncts.push(asocs.childNodes[i].innerHTML);
+                            break;
+                    }
+            }
+            console.log(asocNames);
+            console.log(asocFuncts);
             
         }
 
@@ -95,12 +116,13 @@ $(document).ready(function(){
 
   }
 
-
+  var previousValues=[]
 
   document.getElementById('association_select').addEventListener("change",function(e){
     
       const parentEl=document.getElementById("assoc_functions");
       var values = $('#association_select').val();
+      
     //   console.log(values);
 
       var child = parentEl.lastElementChild;  
@@ -117,10 +139,10 @@ $(document).ready(function(){
         const idName=`function_select_${v}`;
        
         
-        const labelAssoc=`<div class="col "><p class="black-text">Functie ${v} :</p></div>`;
-        var selectOptionTemplate=labelAssoc;
-        selectOptionTemplate+=`<div id="div_select_${v}" class="input-field col">`+
-        `<select id="function_select_${v}" name="function_select_${v}" class="browser-default lime darken-3" >`+
+        const labelAssoc=`<label class="black-text">Functie ${v} :</label>`;
+        var selectOptionTemplate;
+        selectOptionTemplate=`<div id="div_select_${v}" class="input-field col">`+
+        `<select id="function_select_${v}" name="function_select_${v}" class=" lime darken-3" >`+
         `<option value="" disabled>Select functie</option>`;
 
         
@@ -134,18 +156,18 @@ $(document).ready(function(){
         });
         
         selectOptionTemplate+='</select>';
-        // selectOptionTemplate+=labelAssoc;
+         selectOptionTemplate+=labelAssoc;
         selectOptionTemplate+='</div>'
 
 
         parentEl.innerHTML+=selectOptionTemplate;
 
-        $('select').formSelect();
+       
         
 
       })
       
-
+      $('select').formSelect();
      
       
       
