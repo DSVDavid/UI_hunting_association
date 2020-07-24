@@ -1,0 +1,197 @@
+
+
+<div class="row management-area ">
+
+  <div class="col s5  management-card table-navigation ">
+      <div class="management-card-inner center grey lighten-3">
+          <nav class="" >
+          <div class="nav-wrapper lime darken-4 s3">
+          <ul class="left " id="search-nav-bar">
+          <li class="search-field">
+          <div class="seach-nav lime darken-4 s3 ">
+            <form>
+              <div class="input-field ">
+                <input class="seach-nav" id="search" type="search" required>
+                <label   for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+            
+          </div>
+          </li>
+          <li><a class="waves-effect waves-light btn green darken-4">Search</a></li>
+
+          <li><a id="newUserBtn" onclick="newUser()" class="waves-effect waves-light btn green darken-3">New </a></li>
+
+          </ul>
+          </div>
+          </nav>
+
+
+        <table class="centered">
+          <thead>
+            <tr >
+                <th>Nume</th>
+                <th>Email</th>
+                <th>Licență</th>
+            </tr>
+            
+          </thead>
+  
+          <tbody>
+            @foreach (var user in (dynamic)ViewData["Users"]){
+            <tr  id="User_@user.Id" class="object-select" onclick="selectItem(this)">
+              <td class="user-username">@user.Name @user.Surname</td>
+              <td class="user-email">@user.Email</td>
+              <td class="user-cnp">@user.Cnp</td>
+              <td class="user-name" hidden>@user.Name</td>
+              <td class="user-surname" hidden>@user.Surname</td>
+              <td class="user-userid" hidden>@user.Id</td>
+              <td class="user-license" hidden>@user.License</td>
+              <td class="user-insurance" hidden>@user.Insurance</td>
+              <td class="user-pass" hidden>@user.Password</td>
+              <tr class="user-asoc" hidden>
+                @foreach(var t in (dynamic)@user.asociations){
+                  <td class="user-@t.AssocName" hidden>@t.AssocName</td>
+                  <td class="user-@t.AssocName"hidden>@t.Function</td>
+                }
+              </tr>
+            </tr>
+            }
+            
+          </tbody>
+        </table>
+
+      <ul class="pagination">
+          <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+          <li class="active"><a href="#!">1</a></li>
+          <li class="waves-effect"><a href="#!">2</a></li>
+          <li class="waves-effect"><a href="#!">3</a></li>
+          <li class="waves-effect"><a href="#!">4</a></li>
+          <li class="waves-effect"><a href="#!">5</a></li>
+          <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+      </ul>
+
+
+      </div>
+  </div>
+  <div  class="col s7 center management-card ">
+      <div id="form-management" class="grey lighten-3 presentation-card card-panel">
+          <div class="user-info-body ">
+              <div class="row">
+                  <form class="col" id="userDetailsForm" method="post" action="/users/create_new_user">
+                    <div class="row">
+                      
+                      <div class="input-field col s6">
+                        <input  id="last_name" name="user_name" type="text" class="validate">
+                        <label for="last_name">Nume</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input id="first_name" name="user_surname" type="text" class="validate">
+                        <label for="first_name">Prenume</label>
+                      </div>
+
+                      
+                      
+                    </div>
+                    
+                    <div class="row">
+                      <div hidden>
+                        <input disabled id="userid">
+                      </div>
+                      <div class="input-field col ">
+                        <input id="password" name="user_pass" type="password" class="validate">
+                        <label for="password">Parolă</label>
+                      </div>
+
+                      <div class="input-field col">
+                        <input id="email" name="user_email" type="text" class="validate">
+                        <label for="email">Email</label>
+                      </div>
+
+                      <div class="input-field col">
+                        <input id="insurance" name="user_insurance" type="text" class="validate">
+                        <label for="insurance">Asigurare</label>
+                      </div>
+
+                     
+
+                      
+                      
+                    </div>
+
+                    <div class="row">
+
+                      <div class="input-field col">
+                        <input id="cnp" name="user_cnp" type="text" class="validate">
+                        <label for="cnp">CNP</label>
+                      </div>
+
+
+                      <div class="input-field col">
+                        <input id="license" name="user_license" type="text" class="validate">
+                        <label for="license">Licență</label>
+                      </div>
+
+                      <div class="input-field col">
+                        
+                        <select id="association_select" name="assoc_select" multiple class="lime darken-3" >
+                          <option value="" disabled>Select asociație</option>
+                          @foreach (var assoc in (dynamic)ViewData["Associations"]){
+                            <option value="@assoc.Name">@assoc.Name</option>
+                          }
+                       </select>
+                       <label>Asociație</label>
+                      </div>
+                      
+                    </div>
+
+                    <div id="assoc_functions" class="row">
+
+                      
+
+                     
+
+                     
+                      
+                    </div>
+
+
+                    <div class="row ">
+                      <div class="col control-menu form-control-menu">
+                        
+                        <button type="submit" class="btn-floating btn-large waves-effect waves-light green menu-btn-item"><i class="material-icons waves-effect waves-light" action="/save_user">save</i></button>
+                        <button type="reset" class="btn-floating btn-large waves-effect waves-light red menu-btn-item"><i class="material-icons">cancel</i></button>
+                        
+                      </div>
+                      
+                    </div>
+                   
+                  </form>
+                </div>
+
+
+            </div>
+      </div>
+  </div>
+  
+  
+</div>
+
+<script type="text/javascript">
+  var functions=[];
+</script>
+
+@foreach (var func in (dynamic)ViewData["Functions"]){
+<script type="text/javascript">
+  var func=['@(func.Id)','@(func.FunctionName)' ];
+  functions.push(func);
+
+
+</script>
+}
+
+
+  <script>
+    var users='@(ViewBag.Users)';
+  </script>
