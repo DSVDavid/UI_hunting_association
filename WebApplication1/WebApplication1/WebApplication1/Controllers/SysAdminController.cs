@@ -26,17 +26,17 @@ namespace HuntingAssociationUI.Controllers
             functions.Add(f2);
 
             Association a1=new Association();
-            a1.Name="Rad SRL";
+            a1.Name="Rad_SRL";
             a1.Id=1;
             associatinos.Add(a1);
 
             Association a2=new Association();
-            a2.Name="Voicu Sabie SA";
+            a2.Name="Voicu_Sabie_SA";
             a2.Id=2;
             associatinos.Add(a2);
 
             Association a3=new Association();
-            a3.Name="Gion SRL";
+            a3.Name="Gion_SRL";
             a3.Id=3;
             associatinos.Add(a3);
 
@@ -55,10 +55,10 @@ namespace HuntingAssociationUI.Controllers
             AssocMemberDTO as2=new AssocMemberDTO();
 
             as1.Function=1;
-            as1.AssocName="Rad Horatiu SRL";
+            as1.AssocName="Rad_SRL";
             
             as2.Function=2;
-            as2.AssocName="Voicu Sabie SA";
+            as2.AssocName="Voicu_Sabie_SA";
 
             p1.asociations=new List<AssocMemberDTO>();
             p1.asociations.Add(as1);
